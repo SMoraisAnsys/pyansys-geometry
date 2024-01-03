@@ -32,9 +32,11 @@ concurrency:
 jobs:
 
   docker-lint:
-    name: Docker linting
+    name: Dockerfile linting
     runs-on: ubuntu-latest
-    uses: ansys/actions/docker-style@feat/lint_dockerfile
-    with:
-      working_directory: docker
-      recursive: true
+    steps:
+      - name: PyAnsys dockerfile check
+        uses: ansys/actions/docker-style@feat/lint_dockerfile
+        with:
+          working_directory: docker
+          recursive: true
