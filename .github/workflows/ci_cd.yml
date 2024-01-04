@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check code style
-        uses: ansys/actions/code-style@v5
+        uses: ansys/actions/code-style@feat/lint_dockerfile
         with:
           docker-recursive: true
 
