@@ -31,15 +31,25 @@ concurrency:
 
 jobs:
 
+  # docker-lint:
+  #   name: Dockerfile linting
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+
+  #     - name: PyAnsys dockerfile check
+  #       uses: ansys/actions/docker-style@feat/lint_dockerfile
+  #       with:
+  #         directory: docker_files
+  #         recursive: false
+
   docker-lint:
-    name: Dockerfile linting
+    name: Dockerfile linting through code-style action
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: PyAnsys dockerfile check
-        uses: ansys/actions/docker-style@feat/lint_dockerfile
+      - name: Check code style
+        uses: ansys/actions/code-style@v5
         with:
-          directory: docker_files
-          recursive: false
+          docker-recursive: true
+
