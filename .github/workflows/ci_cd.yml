@@ -35,8 +35,11 @@ jobs:
     name: Dockerfile linting
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: PyAnsys dockerfile check
         uses: ansys/actions/docker-style@feat/lint_dockerfile
         with:
-          working_directory: docker
+          working-directory: docker
           recursive: true
