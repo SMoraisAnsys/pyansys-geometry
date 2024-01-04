@@ -42,4 +42,4 @@ jobs:
         uses: ansys/actions/docker-style@feat/lint_dockerfile
         with:
           directory: docker
-          recursive: true
+          recursive: false
