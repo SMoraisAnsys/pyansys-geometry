@@ -101,33 +101,8 @@ jobs:
 
 
 
-
-  code-style-0:
-    name: FAIL - not allowed directory
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: PyAnsys dockerfile check
-        uses: ansys/actions/code-style@feat/lint_dockerfile
-        with:
-          directory: docker_folder
-
-  code-style-1:
-    name: FAIL - Allowed directory but no Dockerfile
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: PyAnsys dockerfile check
-        uses: ansys/actions/code-style@feat/lint_dockerfile
-        with:
-          directory: .devcontainer
-
   code-style-2:
-    name: FAIL - Allowed directory but no recursive search
+    name: FAIL - No recursive search
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -135,11 +110,9 @@ jobs:
 
       - name: PyAnsys dockerfile check
         uses: ansys/actions/code-style@feat/lint_dockerfile
-        with:
-          directory: docker
 
   code-style-3:
-    name: FAIL - Allowed directory and recursive search but error level is set to info
+    name: FAIL - Recursive search but error level is set to info
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -148,8 +121,7 @@ jobs:
       - name: PyAnsys dockerfile check
         uses: ansys/actions/code-style@feat/lint_dockerfile
         with:
-          directory: docker
-          recursive: true
+          docker-recursive: true
 
   code-style-4:
     name: SUCCESS - Allowed directory and recursive search and error level is set to error
@@ -161,9 +133,8 @@ jobs:
       - name: PyAnsys dockerfile check
         uses: ansys/actions/code-style@feat/lint_dockerfile
         with:
-          directory: docker
-          recursive: true
-          error-level: 0
+          docker-recursive: true
+          docker-error-level: 0
 
   # docker-lint:
   #   name: Dockerfile linting through code-style action
