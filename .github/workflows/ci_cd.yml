@@ -99,7 +99,15 @@ jobs:
 
 
 
+  code-style-1:
+    name: SUCCESS - No check by default
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
+      - name: PyAnsys dockerfile check
+        uses: ansys/actions/code-style@feat/lint_dockerfile
 
   code-style-2:
     name: FAIL - No recursive search
@@ -110,6 +118,8 @@ jobs:
 
       - name: PyAnsys dockerfile check
         uses: ansys/actions/code-style@feat/lint_dockerfile
+        with:
+          docker-lint: true
 
   code-style-3:
     name: FAIL - Recursive search but error level is set to info
@@ -122,6 +132,7 @@ jobs:
         uses: ansys/actions/code-style@feat/lint_dockerfile
         with:
           docker-recursive: true
+          docker-lint: true
 
   code-style-4:
     name: SUCCESS - Allowed directory and recursive search and error level is set to error
@@ -135,6 +146,7 @@ jobs:
         with:
           docker-recursive: true
           docker-error-level: 0
+          docker-lint: true
 
   # docker-lint:
   #   name: Dockerfile linting through code-style action
