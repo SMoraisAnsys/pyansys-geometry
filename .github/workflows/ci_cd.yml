@@ -86,7 +86,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        docker-directory: ['docker', 'docker_folder']
+        docker-directory: ['docker', '.devcontainer']
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -94,7 +94,7 @@ jobs:
       - name: PyAnsys dockerfile check
         uses: ansys/actions/docker-style@feat/lint_dockerfile
         with:
-          directory: ${{ matrix.python-version }}
+          directory: ${{ matrix.docker-directory }}
           recursive: true
           error-level: 0
 
