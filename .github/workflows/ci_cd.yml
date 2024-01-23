@@ -31,20 +31,20 @@ concurrency:
 
 jobs:
 
-  docker-style-0:
-    name: FAIL - not allowed directory
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  # docker-style-0:
+  #   name: FAIL - not allowed directory
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
 
-      - name: PyAnsys dockerfile check
-        uses: ansys/actions/docker-style@feat/lint_dockerfile
-        with:
-          directory: docker_folder
+  #     - name: PyAnsys dockerfile check
+  #       uses: ansys/actions/docker-style@feat/lint_dockerfile
+  #       with:
+  #         directory: docker_folder
 
   docker-style-1:
-    name: FAIL - Allowed directory but no Dockerfile
+    name: FAIL - DS - No Dockerfile
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -56,7 +56,7 @@ jobs:
           directory: .devcontainer
 
   docker-style-2:
-    name: FAIL - Allowed directory but no recursive search
+    name: FAIL - DS - No recursive search
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -68,7 +68,7 @@ jobs:
           directory: docker
 
   docker-style-3:
-    name: FAIL - Allowed directory and recursive search but error level is set to info
+    name: FAIL - DS - Error level is set to info
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -81,8 +81,12 @@ jobs:
           recursive: true
 
   docker-style-4:
-    name: SUCCESS - Allowed directory and recursive search and error level is set to error
+    name: SUCCESS - DS
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        docker-directory: ['docker', 'docker_folder']
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -90,17 +94,15 @@ jobs:
       - name: PyAnsys dockerfile check
         uses: ansys/actions/docker-style@feat/lint_dockerfile
         with:
-          directory: docker
+          directory: ${{ matrix.python-version }}
           recursive: true
           error-level: 0
 
 
 
 
-
-
   code-style-1:
-    name: SUCCESS - No check by default
+    name: SUCCESS - CS - No check by default
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -110,7 +112,7 @@ jobs:
         uses: ansys/actions/code-style@feat/lint_dockerfile
 
   code-style-2:
-    name: FAIL - No recursive search
+    name: FAIL - CS - No recursive search
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -122,7 +124,7 @@ jobs:
           docker-lint: true
 
   code-style-3:
-    name: FAIL - Recursive search but error level is set to info
+    name: FAIL - CS - Error level is set to info
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -131,11 +133,11 @@ jobs:
       - name: PyAnsys dockerfile check
         uses: ansys/actions/code-style@feat/lint_dockerfile
         with:
-          docker-recursive: true
           docker-lint: true
+          docker-recursive: true
 
   code-style-4:
-    name: SUCCESS - Allowed directory and recursive search and error level is set to error
+    name: SUCCESS - CS
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
