@@ -98,8 +98,33 @@ jobs:
           recursive: true
           error-level: 0
 
+  docker-style-5:
+    name: SUCCESS - DS multi
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
+      - name: PyAnsys dockerfile check
+        uses: ansys/actions/docker-style@feat/lint_dockerfile
+        with:
+          directory: "docker .devcontainer"
+          recursive: true
+          error-level: 0
 
+  docker-style-6:
+    name: SUCCESS - DS multi
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: PyAnsys dockerfile check
+        uses: ansys/actions/docker-style@feat/lint_dockerfile
+        with:
+          directory: "docker .devcontainer something"
+          recursive: true
+          error-level: 0
 
   code-style-1:
     name: SUCCESS - CS - No check by default
