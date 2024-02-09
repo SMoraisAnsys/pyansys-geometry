@@ -113,7 +113,7 @@ jobs:
           error-level: 0
 
   docker-style-6:
-    name: SUCCESS - DS multi
+    name: SUCCESS - DS multi warning
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
